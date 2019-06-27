@@ -1,28 +1,70 @@
-import { BrowserModule } from '@angular/platform-browser';
+
 import { NgModule } from '@angular/core';
 
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { LoginService } from './login/login.service';
-import { AppRoutingModule } from './app.routing';
-
-import { HttpClientModule } from '@angular/common/http';
-import { HomeComponent } from './home/home.component';
-
+import { TaskListComponent } from './components/task-list/task-list.component';
+import {
+  MatButtonModule,
+  MatInputModule,
+  MatRippleModule,
+  MatFormFieldModule,
+  MatTooltipModule,
+  MatSelectModule,
+  MatTableModule,
+  MatDialogModule,
+  MatToolbarModule,
+  MatCheckboxModule,
+  MatCardModule,
+  MatListModule,
+  MatRadioModule,
+  MatIconModule,
+  MatMenu,
+  MatMenuModule,
+  MatProgressSpinnerModule
+} from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { DialogComponent } from './components/task-list/dialog/dialog.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { HttpInterceptorAuthService } from './components/security/http-interceptor-auth.service';
+import { LoginComponent } from './components/login/login.component';
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    HomeComponent
+    TaskListComponent,
+    DialogComponent,
+    LoginComponent
   ],
   imports: [
-    BrowserModule,
-    ReactiveFormsModule,
+    FormsModule ,
+    HttpClientModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
-    HttpClientModule
+    MatButtonModule,
+    MatDialogModule,
+    MatProgressSpinnerModule,
+  MatInputModule,
+  MatRippleModule,
+  MatFormFieldModule,
+  MatTooltipModule,
+  MatSelectModule,
+  MatTableModule,
+  MatToolbarModule,
+  MatIconModule,
+  MatButtonModule,
+  MatCheckboxModule,
+   MatCardModule,
+   MatFormFieldModule,
+   MatInputModule,
+   MatListModule,
+   MatRadioModule,
+  MatMenuModule,
+ReactiveFormsModule,
+  BrowserAnimationsModule
   ],
-  providers: [LoginService],
+  providers: [{provide: HTTP_INTERCEPTORS,useClass: HttpInterceptorAuthService, multi:true}],
+  entryComponents:[DialogComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

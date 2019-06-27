@@ -1,0 +1,65 @@
+<mat-toolbar color="primary">
+    <span class="fill-remaining-space">
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu" [overlapTrigger]="false">
+        <button mat-menu-item>
+          <mat-icon>home</mat-icon>
+          <span>Home</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>people_outline</mat-icon>
+          <span>Connecting</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>videocam</mat-icon>
+          <span>Let's talk</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>exit_to_app</mat-icon>
+          <span>Logout</span>
+        </button>
+      </mat-menu>
+    </span>
+    <span class="fill-remaining-space">Angular Spring Boot Sample </span>
+  </mat-toolbar>
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+              <!-- Position Column -->
+              <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef> No. </th>
+
+                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+              </ng-container>
+
+              <!-- Name Column -->
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+              </ng-container>
+
+
+              <!-- Symbol Column -->
+              <ng-container matColumnDef="status"  >
+                <th mat-header-cell *matHeaderCellDef> Status </th>
+                <td mat-cell *matCellDef="let element" [ngStyle]="{'color':element.status === 'In-Progress' ? 'red' : 'green' }"> {{element.status}} </td>
+              </ng-container>
+              <ng-container matColumnDef="delete">
+                  <th mat-header-cell *matHeaderCellDef> Delete </th>
+                  <td mat-cell *matCellDef="let element" >
+                      <button mat-button  (click)="deleteTask(element.id)">Delete</button>
+                     </td>
+                </ng-container>
+              <ng-container matColumnDef="update">
+                  <th mat-header-cell *matHeaderCellDef> Update </th>
+                  <!-- <td mat-cell *matCellDef="let element" (click)="updateTask()"> Update </td> -->
+                  <td mat-cell *matCellDef="let element" >
+                      <button mat-button  (click)="updateTask()">Update</button>
+                  </td>
+
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <button mat-fab (click)="openDialog()">Add</button>

@@ -3,17 +3,21 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Angular-Animation": {
+    "task-table": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
       "prefix": "app",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/Angular-Animation",
+            "outputPath": "dist/task-table",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -23,9 +27,11 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "es5BrowserSupport": true
           },
           "configurations": {
             "production": {
@@ -43,25 +49,32 @@
               "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": true
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
             }
           }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "Angular-Animation:build"
+            "browserTarget": "task-table:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "Angular-Animation:build:production"
+              "browserTarget": "task-table:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Angular-Animation:build"
+            "browserTarget": "task-table:build"
           }
         },
         "test": {
@@ -72,7 +85,8 @@
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
             "styles": [
-              "src/styles.css"
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "src/styles.scss"
             ],
             "scripts": [],
             "assets": [
@@ -95,19 +109,20 @@
         }
       }
     },
-    "Angular-Animation-e2e": {
+    "task-table-e2e": {
       "root": "e2e/",
       "projectType": "application",
+      "prefix": "",
       "architect": {
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "Angular-Animation:serve"
+            "devServerTarget": "task-table:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "Angular-Animation:serve:production"
+              "devServerTarget": "task-table:serve:production"
             }
           }
         },
@@ -123,5 +138,5 @@
       }
     }
   },
-  "defaultProject": "Angular-Animation"
+  "defaultProject": "task-table"
 }
