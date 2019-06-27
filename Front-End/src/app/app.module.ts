@@ -37,6 +37,7 @@ import { LoginComponent } from './components/login/login.component';
     LoginComponent
   ],
   imports: [
+    ReactiveFormsModule,
     FormsModule ,
     HttpClientModule,
     BrowserAnimationsModule,
